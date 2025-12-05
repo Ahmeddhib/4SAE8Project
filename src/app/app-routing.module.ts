@@ -8,6 +8,7 @@ const x: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path: 'suggestions', loadChildren: () => import('./features/suggestions/suggestions.module').then(m => m.SuggestionsModule) },
   { path: 'users', loadChildren: () => import('./features/users/users.module').then(m => m.UsersModule) },
+  { path: 'tests', loadChildren: () => import('./test/test.module').then(m => m.TestModule) },
 
   { path: '**', component: NotFoundComponent },
 ];

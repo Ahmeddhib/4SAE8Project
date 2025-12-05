@@ -1,0 +1,51 @@
+<form [formGroup]="suggForm">
+  <legend>Add suggestion</legend>
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="tape title"
+      formControlName="title"
+    />
+    <div
+      *ngIf="suggForm.get('title')?.touched && suggForm.get('title')?.invalid"
+    >
+      <span
+        *ngIf="suggForm.get('title')?.errors?.['required']"
+        style="color: red"
+        >this field is required</span
+      >
+      <span *ngIf="suggForm.get('title')?.errors?.['pattern']"
+         style="color: red">pattern would be respected</span
+      >
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="describe your suggestion"
+      formControlName="description"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    <select id="" class="form-select" formControlName="category">
+      <option>---choice category----</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Date</label>
+    <input type="text" class="form-control" readonly formControlName="date" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Status</label>
+    <input type="text" class="form-control" readonly formControlName="status" />
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="submit()">
+    Submit
+  </button>
+</form>

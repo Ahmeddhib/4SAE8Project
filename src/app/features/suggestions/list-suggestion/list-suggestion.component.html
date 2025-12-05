@@ -1,6 +1,7 @@
 <h1>Liste de Suggestions</h1>
 
 <input type="text" [(ngModel)]='searchItem' >
+<button routerLink="./add">add new suggestion</button>
 <div class="card" *ngFor="let s of filter()">
   <div class="card-header">
     {{ s.title }}
