@@ -31,6 +31,10 @@ export class FormComponent {
     console.log(this.suggForm.value);
   }
 
+
+  get title(){
+    return this.suggForm.get('title');
+  }
   submit() {
     return console.log(this.suggForm.get('title'));
   }

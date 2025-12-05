@@ -9,7 +9,7 @@
       formControlName="title"
     />
     <div
-      *ngIf="suggForm.get('title')?.touched && suggForm.get('title')?.invalid"
+      *ngIf="title?.touched && suggForm.get('title')?.invalid"
     >
       <span
         *ngIf="suggForm.get('title')?.errors?.['required']"
