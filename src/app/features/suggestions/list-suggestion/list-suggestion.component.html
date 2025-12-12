@@ -4,7 +4,7 @@
 <button routerLink="./add">add new suggestion</button>
 <div class="card" *ngFor="let s of suggestionList">
   <div class="card-header">
-    {{ s.title }}
+    {{ s.title }} -- {{s.category}}
   </div>
   <div class="card-body">
     <h5 class="card-title">
@@ -25,6 +25,7 @@
       Add to favorite
     </button>
     <a [routerLink]="['./',s.id]">more details</a>
+     <a [routerLink]="['./update',s.id]">update</a>
   </div>
 </div>
 

@@ -8,16 +8,19 @@
       placeholder="tape title"
       formControlName="title"
     />
-    <div
-      *ngIf="title?.touched && suggForm.get('title')?.invalid"
-    >
+    <div *ngIf="title?.touched && suggForm.get('title')?.invalid">
       <span
         *ngIf="suggForm.get('title')?.errors?.['required']"
         style="color: red"
         >this field is required</span
       >
-      <span *ngIf="suggForm.get('title')?.errors?.['pattern']"
-         style="color: red">pattern would be respected</span
+      <span *ngIf="title?.errors?.['minlength']" style="color: red"
+        >this field must has at least 5 caracters</span
+      >
+      <span
+        *ngIf="suggForm.get('title')?.errors?.['pattern']"
+        style="color: red"
+        >pattern would be respected</span
       >
     </div>
   </div>
@@ -30,11 +33,37 @@
       formControlName="description"
     />
   </div>
+  <div *ngIf="description?.touched && description?.invalid">
+    <span *ngIf="description?.errors?.['required']" style="color: red"
+      >this field is required</span
+    >
+    <span *ngIf="description?.errors?.['maxlength']" style="color: red"
+      >this field must has at most 30 caracters</span
+    >
+    <span
+      *ngIf="suggForm.get('description')?.errors?.['pattern']"
+      style="color: red"
+      >pattern would be respected</span
+    >
+  </div>
+
   <div class="mb-3">
     <label class="form-label">Category</label>
     <select id="" class="form-select" formControlName="category">
-      <option>---choice category----</option>
+      <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
     </select>
+  </div>
+  <div
+    *ngIf="
+      suggForm.controls['category'].touched &&
+      suggForm.controls['category'].touched
+    "
+  >
+    <span
+      *ngIf="suggForm.controls['category']?.errors?.['required']"
+      style="color: red"
+      >this field is required</span
+    >
   </div>
   <div class="mb-3">
     <label class="form-label">Date</label>
@@ -45,7 +74,12 @@
     <input type="text" class="form-control" readonly formControlName="status" />
   </div>
 
-  <button type="submit" class="btn btn-primary" (click)="submit()">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    (click)="submit()"
+    [disabled]="suggForm.invalid"
+  >
     Submit
   </button>
 </form>

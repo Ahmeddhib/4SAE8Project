@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SuggestionService } from '../../../core/services/suggestion.service';
 import { Router } from '@angular/router';
+import { Suggestion } from '../../../models/suggestion';
 
 @Component({
   selector: 'app-form',
@@ -9,8 +9,23 @@ import { Router } from '@angular/router';
   styleUrl: './form.component.css',
 })
 export class FormComponent {
+  id!: number;
+  suggestion!: Suggestion;
   suggForm!: FormGroup;
-  constructor(private suggData:SuggestionService, private route:Router) {
+  categories: string[] = [
+    'Infrastructure et bâtiments',
+    'Technologie et services numériques',
+    'Restauration et cafétéria',
+    'Hygiène et environnement',
+    'Transport et mobilité',
+    'Activités et événements',
+    'Sécurité',
+    'Communication interne',
+    'Accessibilité',
+    'Autre',
+  ];
+
+  constructor(private route: Router) {
     this.suggForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,
@@ -20,7 +35,7 @@ export class FormComponent {
       ]),
       description: new FormControl('', [
         Validators.required,
-        Validators.minLength(30),
+        Validators.maxLength(30),
       ]),
       category: new FormControl('', [Validators.required]),
       date: new FormControl(new Date(), []),
@@ -30,14 +45,14 @@ export class FormComponent {
   }
 
   ngOnInit() {
-    console.log(this.suggForm.value);
+    console.log(this.suggForm.get('title'));
   }
 
-
-  get title(){
+  get title() {
     return this.suggForm.get('title');
   }
-  submit() {
-    return this.suggData.create(this.suggForm.value).subscribe(()=>this.route.navigate(['./']));
+  get description() {
+    return this.suggForm.get('description');
   }
+  submit() {}
 }

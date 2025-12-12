@@ -7,7 +7,6 @@ import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { AccueilComponent } from './core/accueil/accueil.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,7 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
     NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
-  providers: [provideHttpClient()],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
